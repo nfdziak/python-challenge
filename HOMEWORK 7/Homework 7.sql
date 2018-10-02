@@ -1,38 +1,50 @@
 USE SAKILA;
+
+-- 1a
 SELECT first_name, last_name FROM actor;
 
+-- 1b
 SELECT CONCAT(first_name,' ',last_name) AS "ACTOR NAME" 
 FROM actor;
 
+-- 2a 
 SELECT * FROM actor
 WHERE first_name = "Joe";
-
+ 
+-- 2b
 SELECT * FROM actor 
 WHERE last_name LIKE '%GEN%';
 
+-- 2c
 SELECT * FROM actor 
 WHERE last_name LIKE '%LI%';
 
+-- 
 ALTER TABLE actor
 MODIFY COLUMN last_name varchar(45) AFTER actor_id;
 
+-- 2d
 SELECT country_id, country
 FROM sakila.country
 WHERE country
 IN ("Afghanistan", "Bangladesh", "China");
 
+-- 3a
 ALTER TABLE actor
 ADD COLUMN description BLOB;
 
+-- 3b
 ALTER TABLE actor
 DROP COLUMN description;
 
+-- 4a
 SELECT last_name, 
     COUNT(last_name)
 FROM actor
 GROUP BY last_name
 HAVING COUNT(last_name) > 0;
 
+-- 4b
 SELECT last_name, 
     COUNT(last_name)
 FROM actor
@@ -62,11 +74,11 @@ INNER JOIN address
 ON staff.address_id=address.address_id;
  
 -- 6b
-SELECT staff.first_name, staff.last_name, payment.payment_date, (payment.amount) AS 'Total Payment'
+SELECT staff.last_name, SUM(payment.amount) -- payment.payment_date
 FROM staff 
-LEFT JOIN payment
-USING(staff_id)
-WHERE payment_date > 2005-07-31  2005-09-01;
+JOIN payment
+ON staff.staff_id=payment.staff_id
+Group by staff.last_name;
 
 -- 6c
 SELECT title, COUNT(film_actor.actor_id) AS 'Number of Actors'
@@ -112,19 +124,12 @@ WHERE actor_id IN
 );
 
 -- 7c
-SELECT first_name, last_name, email
+SELECT first_name, last_name, email, country.country
 FROM customer
-WHERE address_id in
-(
-SELECT address_id
-FROM address
-WHERE city_id IN
-(
-SELECT city_id 
-FROM country
-WHERE country = 'Canada'
-)
-);
+JOIN address ON customer.address_id=address.address_id
+JOIN city ON city.city_id=address.city_id
+JOIN country ON city.country_id=country.country_id
+WHERE country = 'Canada';
 
 -- 7d
 SELECT title
@@ -174,8 +179,26 @@ JOIN category ON film_category.category_id=category.category_id
 Group By category.name
 Order by SUM(payment.amount) desc;
 
--- 8
-CREATE VIEW 
+-- 8a
+CREATE VIEW revenue_per_genre AS 
+SELECT category.name AS 'Genre', SUM(payment.amount) AS 'Revenue'
+FROM payment
+JOIN rental ON payment.rental_id=rental.rental_id
+JOIN inventory ON rental.inventory_id=inventory.inventory_id
+JOIN film_category ON inventory.film_id=film_category.film_id
+JOIN category ON film_category.category_id=category.category_id
+Group By category.name
+Order by SUM(payment.amount) desc;
+
+-- 8b
+-- To display the view, I would click on Views, then click on the view I created (revenue_per_genre). With the cursor on view 
+-- name, I would then click on the db icon appearing at the end of the line. This brings up the query shown below in a new query tab. 
+-- Running the query will pull up the view.
+SELECT * FROM sakila.revenue_per_genre;
+
+-- 8c
+DROP VIEW revenue_per_genre;
+
 
 
 
