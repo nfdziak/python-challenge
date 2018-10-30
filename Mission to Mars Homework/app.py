@@ -6,11 +6,6 @@ app = Flask(__name__)
 
 app.config["MONGO_URI"] = "mongodb://localhost:27017/mars_data"
 mongo = PyMongo(app)
-# mongo = pymongo(app, uri="mongodb://localhost:27017/mars_app")
-# app.config["MONGO_URI"] = "mongodb://localhost:27017/mars_app"
-# mongo = pymongo(app)
-
-#  client = pymongo.MongoClient("localhost", 27017)
 
 @app.route("/")
 def index():

@@ -60,7 +60,7 @@ def scrape():
 
     hemisphere_title = soup.select_one("div h2:nth-of-type(1)").text
     
-    hemisphere_title4 = soup.select_one("div h3:nth-of-type(4)").text
+    hemisphere_title4 = soup.select_one("div h3:nth-of-type(5)").text
 
     hemisphere_title3 = soup.select_one("div h3:nth-of-type(6)").text
 
@@ -106,7 +106,7 @@ def scrape():
     parent_div = soup.find('div', class_= 'downloads')
     link = parent_div.find('a')
     mars_data["img_url2"] = link['href']
-    mars_data["hemisphere_title4"] = soup.select_one("div h3:nth-of-type(8)").text
+    mars_data["hemisphere_title2"] = soup.select_one("div h3:nth-of-type(8)").text
       
      # return to previous page 
     xpath = '//*[@id="splashy"]/div[1]/div[1]/div[3]/section/a'
@@ -131,7 +131,7 @@ def scrape():
     parent_div = soup.find('div', class_= 'downloads')
     link = parent_div.find('a')
     mars_data["img_url3"] = link['href']
-    mars_data["hemisphere_title3"] = soup.select_one("div h3:nth-of-type(3)").text
+    mars_data["hemisphere_title3"] = soup.select_one("div h3:nth-of-type(6)").text
       
     
      # return to previous page 
@@ -156,9 +156,9 @@ def scrape():
     parent_div = soup.find('div', class_= 'downloads')
     link = parent_div.find('a')
     mars_data["img_url4"] = link['href']
-    mars_data["hemisphere_title2"] = soup.select_one("div h3:nth-of-type(4)").text
+    mars_data["hemisphere_title4"] = soup.select_one("div h3:nth-of-type(5)").text
 
-    
+   
     return mars_data
   
 

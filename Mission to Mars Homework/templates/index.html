@@ -22,7 +22,7 @@
     <div class="row" id="mission_to_mars">
         <div class="col-md-12">
             <h2>Latest Mars News</h2>
-        </div>
+    </div>
        
       <div class="col-md-12">
         <h4>{{mars_data.title}}</h4>
@@ -33,11 +33,10 @@
            <p> {{mars_data.mars_weather}}
            </p>
        </div>
-
        <div class="col-md-12">     
          <h3>Mars Facts</h3>              
         <table class="table table-bordered">
-             {{mars_data.table |safe}}
+             {{mars_data.table|safe}}
         <br>
        </div>
       
@@ -45,33 +44,31 @@
     <h2>Featured Mars Image</h2>
     <img src= {{mars_data.featured_image}} class="float-right">
       </div>
-
+      <br>
       <div class="row">
         <div class="col-md-12">
             <h2 style="text-align: center;">Mars Hemispheres</h2>
          
-            <div class="col-md-12">
+        <div class="col-md-12">
             <img src={{mars_data.img_url}} alt="" style="width:100%">
             <h3>{{mars_data.hemisphere_title}}</h3>
-                
-      <div> class = <col-md-12> 
-        <img src={{mars_data.img_url2}} alt="" style="width:100%">
-            <h3>{{mars_data.hemisphere_title4}}</h3>
+          <br>
+          <br>
+          </div>     
+                      
+          <img src={{mars_data.img_url2}} alt="" style="width:100%">
+            <h3>{{mars_data.hemisphere_title2}}</h3>
+          <br> 
+          <br>
 
-            <div> class = <col-md-12> 
-              <img src={{mars_data.img_url3}} alt="" style="width:100%">
-              <h3>{{mars_data.hemisphere_title3}}</h3>
-                               
-            <div> class = <col-md-12> 
-              <img src={{mars_data.img_url4}} alt="" style="width:100%">
-              <h3>{{mars_data.hemisphere_title2}}</h3>
-         </div>
-       </div>
-    </div>
-   </div>  
-</div>  
-
-</body>
+          <img src={{mars_data.img_url3}} alt="" style="width:100%">
+             <h3>{{mars_data.hemisphere_title3}}</h3>
+          <br>
+          <br>
+          <img src={{mars_data.img_url4}} alt="" style="width:100%">
+              <h3>Valles Marineris Enhanced</h3>     
+      </div>
+    </body>
 </html>
 
 
