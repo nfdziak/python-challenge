@@ -29,10 +29,13 @@ function buildCharts(sample) {
     console.log(sampleData);
     const otu_ids = sampleData.otu_ids;
     const sample_values = sampleData.sample_values;
+    const otu_labels = sampleData.otu_labels;
     var data = [
       {
         values: sample_values.slice(0, 10),
-        labels: otu_ids.slice(0, 10),    
+        labels: otu_ids.slice(0, 10), 
+        hovertext:otu_labels.slice(0, 10),
+        hoverinfo:"hovertext",
         type: "pie"
     }];
     
@@ -43,7 +46,9 @@ function buildCharts(sample) {
     Plotly.plot("pie", data, layout);
 // @TODO: Build a Bubble Chart using the sample data
     var bubbleLayout = {
-      xaxis: { title: "OTU ID" }
+      xaxis: { title: "OTU ID"  },
+      hovermode: "closest",
+      margin: { t:0}
     };
     var bubbleData = [
       {
@@ -52,6 +57,7 @@ function buildCharts(sample) {
         mode: "markers",
         marker: {
           size: sample_values,
+          color: otu_ids
                 }
       }
     ];
