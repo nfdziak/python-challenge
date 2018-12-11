@@ -73,7 +73,6 @@ def sample_metadata(sample):
         sample_metadata["AGE"] = result[3]
         sample_metadata["LOCATION"] = result[4]
         sample_metadata["BBTYPE"] = result[5]
-        sample_metadata["WFREQ"] = result[6]
 
     print(sample_metadata)
     return jsonify(sample_metadata)
